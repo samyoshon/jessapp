@@ -2,6 +2,7 @@
   <meta name="turbolinks-cache-control" content="no-cache">
 <% end %>
 
+<% if brand.user.is_advertiser? %>
 <%= link_to brand do %>
 	<div class="col-md-12 mb-4 brand-container">
 		<div class="col-md-12 card h-100 product-container-card card-body">
@@ -22,4 +23,5 @@
 	    	</div>
 		</div>
 	</div>
+<% end %>
 <% end %>

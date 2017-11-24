@@ -1,0 +1,6 @@
+<h3>Available Markets</h3>
+<ol>
+<% @markets.each do |market| %>
+    <li><%= link_to "#{market.title} Marketplace", root_url(subdomain: market.subdomain) %></li>
+<% end %>
+</ol>

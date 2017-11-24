@@ -1,0 +1,51 @@
+<div class="content-container">
+  <%= render partial: "users/sidenav" %>
+
+  <div class="container col-md-10 col-sm-12 container-mobile-product">
+    <h1>Product Categories</h1>
+      <% @categories.each do |category| %>
+        <%= form_for category, url: user_update_categories_path, method: :put, html: {id: category.id} do |f| %>
+            <% if category.errors.any? %>
+              <div id="error_explanation">
+                  <h2><%= pluralize(category.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+                <ul>
+                  <% category.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <%= f.text_field :category_name, class: "" %>
+          <%= f.submit "Update", class: "btn btn-danger" %>
+        <% end %>
+      <% end %>
+
+    <h1>Create Categories</h1>
+
+    <%= form_for(@category, url: user_create_categories_path, :html => {:multipart => true})  do |f| %>
+      <% if @category.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+          <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <h4>Category</h4>
+      <div class="form-group">
+        <%= f.text_field :category_name, autofocus: true, placeholder: "Add Category", class: "form-control" %>
+      </div>
+
+      <%= f.hidden_field :market, value: $current_market %>
+      <div class="form-group">
+        <%= f.button "Create Category", class: "btn btn-primary", 'data-disable-with' => "Creating Category...".html_safe, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+      </div>
+    <% end %>
+  </div>
+</div>

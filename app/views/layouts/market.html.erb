@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WELCOME TO THE MARKET</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<h1>THIS IS THE MARKET</h1>
+<%= render "shared/navbar" %>
+
+<div class="container">
+  <% flash.each do |name, msg| %>
+  	<%= content_tag :div, msg, class: "alert alert-info" %>
+  <% end %>
+  <!-- <%= flash.alert %> -->
+  <%= yield %>
+</div>
+
+</body>
+
+</html>

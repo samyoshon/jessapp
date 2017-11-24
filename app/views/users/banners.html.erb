@@ -1,0 +1,62 @@
+<div class="content-container">
+  <%= render partial: "users/sidenav" %>
+
+  <div class="container col-md-10 col-sm-12 container-mobile-product">
+    <h1>Edit Banners</h1>
+
+    <%= form_for(@banner, :url => 'banners', :html => {:multipart => true})  do |f| %>
+      <% if @banner.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@banner.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+          <ul>
+          <% @banner.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+
+      <br>
+      <h4>Product</h4>
+      <div class="form-group">
+        <%= f.text_field :product_index, autofocus: true, placeholder: "product/index", class: "form-control", id: "email-mask" %> <!-- WHY DID I EMAIL MASK? -->
+      </div>  
+
+      <div class="form-group">
+        <%= f.text_field :product_show, placeholder: "product/show", class: "form-control", id: "email-mask" %>
+      </div>  
+
+      <div class="form-group">
+        <%= f.text_field :product_new, placeholder: "product/new", class: "form-control", id: "email-mask" %>
+      </div> 
+
+      <br>
+      <h4>Forum</h4>
+      <div class="form-group">
+        <%= f.text_field :forum_index, placeholder: "forum/index", class: "form-control", id: "email-mask" %>
+      </div>  
+
+      <div class="form-group">
+        <%= f.text_field :forum_show, placeholder: "forum/show", class: "form-control", id: "email-mask" %>
+      </div>  
+
+      <div class="form-group">
+        <%= f.text_field :forum_new, placeholder: "forum/new", class: "form-control", id: "email-mask" %>
+      </div>  
+
+      <br>
+      <h4>Account</h4>
+      <div class="form-group">
+        <%= f.text_field :account_profile, placeholder: "account/profile", class: "form-control", id: "email-mask" %>
+      </div>
+
+      
+      <div class="form-group">
+        <%= f.button class: "btn btn-primary", style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+      </div>
+    <% end %>
+  </div>
+</div>

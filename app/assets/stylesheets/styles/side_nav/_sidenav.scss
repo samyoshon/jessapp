@@ -1,0 +1,101 @@
+/* VARIABLES */
+
+$box-shadow: 0px 1px 2px #888888;
+
+/* VARIABLES END */
+
+.sidenav-container-main {
+  display: block;
+}
+
+.sidenav-container-desktop {
+  padding: 0px;
+}
+
+.sidenav-container-filters {
+  margin-right: 0px !important;
+}
+
+.sidenav-filters {
+  &:hover {
+    text-decoration: none;  
+  }
+}
+
+.sidenav-filters-header {
+  margin: 0;
+}
+
+#product_search, #forum_thread_search, #brand_search, .sidenav-container {
+  box-shadow: $box-shadow;
+}
+
+#product_search, #forum_thread_search, #brand_search {
+  padding: 12px;
+}
+
+.sidenav {
+	height: 100%;
+}
+
+.sidenav-category-label {
+	display: block;
+	cursor: pointer;
+}
+
+.sidenav-category-label .checkbox {
+  display: inline-block 
+}
+
+.sidenav-price-label {
+	display: inline-block;
+	width: 30% !important;
+}
+
+/*user sidenav*/
+
+.list-group {
+  box-shadow: 0px 1px 2px #888888;
+}
+
+li.list-group-item {
+  padding: 0;
+}
+
+.sidenav-nav > li.active > a {
+  color: white !important;
+  background-color: #337ab7 !important;
+  border-color: #337ab7 !important;
+}
+
+a.list-group-item {
+  border-style: none !important;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;	
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;	
+}
+
+.sidenav-container-users {
+  padding: 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidenav-container-main {
+        margin-bottom: 30px;
+    }
+   
+    a.list-group-item {
+      background: none !important;
+    }
+    
+    .user-nav > li.active > a {
+      color: white !important;
+    }
+}

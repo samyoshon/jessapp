@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  market_id: 
+  product_index: MyText
+  product_show: MyText
+  forum_index: MyText
+  forum_show: MyText
+  account_profile: MyText
+
+two:
+  user_id: 
+  market_id: 
+  product_index: MyText
+  product_show: MyText
+  forum_index: MyText
+  forum_show: MyText
+  account_profile: MyText

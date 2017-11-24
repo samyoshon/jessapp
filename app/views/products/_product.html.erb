@@ -1,0 +1,45 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<div class="col-lg-4 col-md-4 col-sm-6 mb-4 product-container">
+  <div class="card h-100 product-container-card">
+    <% if product.images.present? %>
+		<div class="scroller">
+			<% product.images.each do |p| %>
+					<%= link_to product do %>
+						<%= image_tag(p.url, class: "image-container") %>
+					<% end %>
+			<% end %>
+		</div>
+	<% else %>
+		<%= link_to product do %>
+			<%= image_tag("no-image.png", alt: "Default Profile Pic", class: "image-container no-image") %>
+		<% end %>
+	<% end %>
+    <div class="card-body">
+      <h4 class="card-title product-title">
+        <%= link_to product do %>
+			<span style="color: <%= @market.first_color %>"><%= sanitize markdownify product.title %></spam>
+		<% end %>
+      </h4>
+      <h5>$<%= product.price %></h5>
+      <h5 class="card-text product-description"><%= sanitize markdownify product.description %></h5>
+    </div>
+    <div class="card-footer">
+      <p id="product_<%= product.id %>_likes"><%= render partial: "likes", locals: {product: product} %></p>
+
+      <small><%= local_time_ago product.created_at %></small>
+	  <span class="product-category"><%= markdownify product.category.icon %></span>
+<!--       <% if @user.present? %>
+		<%= form_for @flag, url: product_flag_path do |f| %>
+			<%= f.hidden_field :product_id, :value => product.id %>
+			<%= f.hidden_field :user_id, :value => @user.id %>
+			<%= f.button '<i class="fa fa-flag-o" aria-hidden="true"></i>'.html_safe, :onclick => "if(!confirm(\'Are you sure you want to report this product?\')) return false;", class: "btn-flag", style: "color: #{ @market.first_color }" %>
+		<% end %>
+	  <% else %> -->
+	  <!-- <% end %> -->
+    </div>
+    
+  </div>
+</div>

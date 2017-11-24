@@ -1,0 +1,78 @@
+<% if @banner.product_show.present? %>
+    <div class="alert alert-info alert-dismissable">
+  	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  	<%= @banner.product_show %>
+  </div>
+<% end %>
+<div class="container mobile-container">
+  <!-- Portfolio Item Heading -->
+  
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <div class="col-md-7 show-images-container">
+    <% if @product.images.present? %>
+			<div class="slider slider-for">
+				<% @product.images.each do |p| %>
+					<div><%= image_tag(p.url, class: "show-image-container") %></div>
+				<% end %>
+			</div>
+			<div class="slider slider-nav">
+				<% @product.images.each do |p| %>
+					<div><%= image_tag(p.url, class: "show-image-selection-container") %></div>
+				<% end %>
+			</div>
+		<% else %>
+			<div><%= image_tag("no-image.png", alt: "Default Profile Pic", class: "image-container no-image show-no-image") %></div>
+		<% end %>
+    </div>
+
+    <div class="col-md-5 show-details-container card">
+      <h3>
+        <% if @product.user.images.present? %><%= image_tag(@product.user.images.url, class: "profile-image-container") %><% else %><%= image_tag("no-profile.png", class: "profile-image-container") %><% end %> <%= @product.user.username %></h3>
+      <% if current_user.present? || (current_user.present? && current_user.is_advertiser != true) %>
+    	  <h4 class="social-icons">
+    		<% if @product.user.facebook? %>
+          <a href="http://www.facebook.com/<%= @product.user.facebook %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+        <% if @product.user.instagram? %>
+    		  <a href="http://www.instagram.com/<%= @product.user.instagram %>" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+<!--         <% if @product.user.snapchat? %>
+    		  <a href="#"><i class="fa fa-snapchat" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %> -->
+        <% if @product.user.twitter? %>
+    		  <a href="http://www.twitter.com/<%= @product.user.twitter %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+    	  </h4>
+      <% end %>
+      <p><%= local_time_ago @product.created_at %></p>
+<!--       <div id="product_<%= @product.id %>_likes">
+        <%= render partial: "likes", locals: {product: @product} %>
+      </div> -->
+      <hr>
+      <h2 class="my-4"><%= sanitize markdownify @product.title %></h2>
+      <h4 style="color: <%= @market.first_color %>;">$<%= @product.price %></h4>
+      <h4 class="my-3">Product Description</h4>
+      <p><%= sanitize markdownify @product.description %></p>
+      <hr>
+      <div class="btn btn-contact-info btn-gradient btn-block card" style="background: <%= @market.first_color %>;  background: -webkit-linear-gradient(left, <%= @market.first_color %> , <%= @market.second_color %>); background: -o-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: -moz-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: linear-gradient(to right, <%= @market.first_color %> , <%= @market.second_color %>);">Contact Seller</div>
+		<div class="show-contact-info show-contact-info-hidden">
+    <% if current_user.present? %>
+        <h5>Contact Details:</h5>
+				<p><i class="fa fa-envelope" aria-hidden="true"></i> <%= sanitize @product.user.email %></p>
+				<% if @product.user.phone_number? %>
+					<p><i class="fa fa-phone" aria-hidden="true"></i> <%= sanitize @product.user.phone_number %></p>
+				<% elsif @product.contact_pref? %>
+					<p><i class="fa fa-phone" aria-hidden="true"></i> <%= sanitize @product.contact_pref %></p>
+				<% end %>
+    <% else %>
+      <h5><%= link_to "Sign up to see contact details.", new_user_registration_path() %></h5>
+    <% end %>
+		</div>
+	</div>
+</div>
+
+    
+  </div>

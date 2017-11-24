@@ -1,0 +1,18 @@
+<% if @banner.forum_index.present? %>
+    <div class="alert alert-info alert-dismissable">
+  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  		<%= @banner.forum_index %>
+	</div>
+<% end %>
+
+<%= render partial: "forum_threads/subnav" %>
+<div class="content-container">
+  <h1 class="page-header">Discussions</h1>
+  <%= render partial: "forum_threads/sidenav" %>
+  <div class="col-md-10 col-sm-12 container-mobile container-mobile-forum">
+  	<%= render @forum_threads %>
+    <div class="col-md-12">
+    	<%= will_paginate @forum_threads %>
+    </div>
+  </div>
+</div>

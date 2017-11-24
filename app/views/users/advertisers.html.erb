@@ -1,0 +1,48 @@
+<div class="content-container">
+	<%= render partial: "users/sidenav" %>
+
+	<div class="container col-md-10 col-sm-12 container-mobile-product">
+		<h1>Set Advertisers</h1>
+		<table class="table-striped">
+			<tr class="user-setting-tr-header">
+			    <th>ID</th>
+			    <th>Advertiser</th>
+			    <th>Email</th>
+			    <th>Market</th>
+			    <th>Update</th>
+	  		</tr>
+			<% @users.each do |user| %>
+				<%= form_for(user, as: :user, :url => user_update_advertisers_path(user), :html => { :method => :put, id: user.id }) do |f| %>
+			  	<% if user.errors.any? %>
+
+			    	<div id="error_explanation">
+			      		<h2><%= pluralize(user.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+			      	<ul>
+			      		<% @user.errors.full_messages.each do |message| %>
+			        		<li><%= message %></li>
+			      		<% end %>
+			      	</ul>
+			    	</div>
+			 	<% end %>
+
+			<!-- view only none expired posts -->
+			
+			
+			<!-- link to update user -->
+			<tr class="user-setting-tr">
+				<td><%= user.id %></td>
+				<td><%= user.is_advertiser %></td>
+				<td><%= user.email %></td>
+				<td><%= user.market_id %></td>
+				<%= f.hidden_field :is_advertiser, value: true %>
+			    <%= f.hidden_field :user_id, value: user.id %>
+			    <td><%= f.submit "Update", class: "btn btn-danger" %></td>
+			</tr>
+
+			<!-- expire user -->
+			<% end %>
+			<% end %>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<%= form_for [@forum_thread, @forum_post] do |f| %>
+  <div class="form-group">
+    <%= f.text_area :body, placeholder: "Add a comment", required: true, data: {behavior: "autocomplete"}, rows: 7, class: "form-control", id: "forum_post_body" %>
+    <!-- <trix-editor input="forum_post_body", data: {behavior: "autocomplete"}></trix-editor> -->
+  </div>
+
+  <div class="form-group">
+    <div id="preview"></div>
+    <%= f.file_field :images, :onchange => "previewFiles()", placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %>
+    <%= f.hidden_field :images_cache %>
+  </div>
+  
+  <div class="form-group">
+    <p id="fp"></p>
+    <% if current_user.present? && current_user.is_advertiser != true %>
+      <%= f.button "Post Comment", class: "btn btn-primary btn-post card", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Posting Comment...".html_safe, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+    <% elsif current_user.present? && current_user.is_advertiser == true %>
+      <h6>Sorry, advertisers do not have permissions to post.</h6>
+      <%= f.button "Post Comment", class: "btn btn-primary btn-post", disabled: true, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+    <% else %>
+      <h5><%= link_to "Sign up to add a comment.", new_user_registration_path() %></h5>
+      <%= f.button "Post Comment", class: "btn btn-primary btn-post", disabled: true, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+    <% end %>
+  </div>
+<% end %>

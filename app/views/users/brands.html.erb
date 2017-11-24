@@ -1,0 +1,100 @@
+<div class="content-container">
+  <%= render partial: "users/sidenav" %>
+
+  <div class="container col-md-10 col-sm-12 container-mobile-product">
+    <h1>Edit Brand</h1>
+
+    <%= form_for @brand, url: user_update_brands_path, method: :put, html: {id: @brand.id} do |f| %>
+      
+      <% if @brand.logo.url.present? %>
+        <div id="preview"><%= image_tag @brand.logo.url %></div>
+      <% elsif %>
+        <div id="preview"></div>
+      <% end %>
+      </br>
+      <div><%= f.file_field :logo, :onchange => "previewFiles()", placeholder: "Brand Logo", accept: ".jpg, .jpeg, .gif, .png" %></div>
+      </br>
+
+      <div class="form-group">
+        <div><%= f.label :name %><br />
+        <%= f.text_field :name, required: true, autofocus: true, placeholder: "Brand Name", class: "form-control" %>
+        </div>
+      </div>  
+      <hr>      
+      <div class="form-group">
+        <div><%= f.label :about %><br />
+        <%= f.trix_editor :about, required: true, autofocus: true, placeholder: "About", class: "form-control" %>
+        </div>
+      </div> 
+      <hr>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div><%= f.label :phone_number %><a href="#" class="tooltip-icon" data-toggle="tooltip" title="Add a phone number if you'd like the option to be contacted via phone. Standard rates apply."> <i class="fa fa-info-circle" aria-hidden="true"></i> </a><br />
+            <%= f.phone_field :phone_number, placeholder: "(XXX) XXX-XXXX", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div><%= f.label :website %><br />
+            <%= f.text_field :website, required: true, placeholder: "Website", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <div><%= f.label :email %><br />
+            <%= f.email_field :email, required: true, placeholder: "Email Address", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+         
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :facebook, placeholder: "Facebook", class: "form-control", id: "input-social" %>
+            <i class="fa fa-facebook-official" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :instagram, placeholder: "Instagram", class: "form-control", id: "input-social" %>
+            <i class="fa fa-instagram" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+
+         <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :twitter, placeholder: "Twitter", class: "form-control", id: "input-social" %>
+            <i class="fa fa-twitter" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <div><%= f.label :return_policy %><br />
+        <%= f.trix_editor :return_policy, required: true, autofocus: true, placeholder: "Return Policy", class: "form-control" %>
+        </div>
+      </div> 
+      <hr>
+      <div class="form-group">
+        <div><%= f.label :shipping_policy %><br />
+        <%= f.trix_editor :shipping_policy, required: true, autofocus: true, placeholder: "Shipping Policy", class: "form-control" %>
+        </div>
+      </div> 
+      <hr>
+      <div class="form-group">
+        <div><%= f.label :other_policy %><br />
+        <%= f.trix_editor :other_policy, required: true, autofocus: true, placeholder: "Additional Policy", class: "form-control" %>
+        </div>
+      </div> 
+      <hr>
+      <div><%= f.button "Update", class: "btn btn-primary card", style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %></div>
+    <% end %>
+ </div>
+</div>

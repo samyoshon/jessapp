@@ -1,0 +1,119 @@
+<div class="content-container">
+  <%= render partial: "users/sidenav" %>
+
+  <div class="container col-md-10 col-sm-12 container-mobile-product">
+    <h1>Edit Profile</h1>
+
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+
+      
+      <% if @user.images.url.present? %>
+        <div id="preview"><%= image_tag @user.images.url %></div>
+      <% elsif %>
+        <div id="preview"></div>
+      <% end %>
+      </br>
+      <div><%= f.file_field :images, :onchange => "previewFiles()", placeholder: "Profile Image", accept: ".jpg, .jpeg, .gif, .png" %></div>
+      </br>
+
+      <div class="form-group">
+        <div><%= f.label :username %><br />
+        <%= f.text_field :username, required: true, autofocus: true, placeholder: "Username", class: "form-control", disabled: true %>
+        </div>
+      </div>  
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div><%= f.label :first_name %><br />
+            <%= f.text_field :first_name, required: true, placeholder: "First Name", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div><%= f.label :last_name %><br />
+            <%= f.text_field :last_name, required: true, placeholder: "Last Name", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div><%= f.label :email %><br />
+        <%= f.email_field :email, required: true, placeholder: "Email Address", class: "form-control", disabled: true %>
+        </div>
+      </div>                
+
+      <div class="form-group">
+        <div><%= f.label :phone_number %><a href="#" class="tooltip-icon" data-toggle="tooltip" title="Add a phone number if you'd like the option to be contacted via phone. Standard rates apply."> <i class="fa fa-info-circle" aria-hidden="true"></i> </a><br />
+        <%= f.phone_field :phone_number, placeholder: "(XXX) XXX-XXXX", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div><%= f.label :school_program %><br />
+            <%= f.select(:school_program, options_for_select(['Undergraduate', 'Graduate', 'Post Graduate'], 3), {prompt: true, required: true}, {class: "form-control"}) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div><%= f.label :class %><br />
+            <%= f.select(:school_class, options_for_select((2017..2030).map{|n| n%1 == 0 ? n.to_i : n}, 3), {prompt: true, required: true}, {class: "form-control"}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :facebook, placeholder: "Facebook", class: "form-control", id: "input-social" %>
+            <i class="fa fa-facebook-official" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :instagram, placeholder: "Instagram", class: "form-control", id: "input-social" %>
+            <i class="fa fa-instagram" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+
+         <div class="col-sm-4">
+          <div class="form-group" id="input-container">
+            <%= f.text_field :twitter, placeholder: "Twitter", class: "form-control", id: "input-social" %>
+            <i class="fa fa-twitter" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <hr>
+
+      <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, :autocomplete => "off", placeholder: "Password", class: "form-control" %></div>
+
+      <div><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-control" %></div>
+
+      <hr>
+
+      <div><%= f.button "Update", class: "btn btn-primary card", style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %></div>
+    <% end %>
+
+<!--     <hr>
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-primary", style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}"%></p>
+
+    <%= link_to "Back", :back %> -->
+  </div>
+</div>

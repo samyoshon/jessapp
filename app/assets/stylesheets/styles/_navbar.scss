@@ -1,0 +1,20 @@
+.navbar {
+	background-color: black;
+}
+
+.navbar-nav > li {
+  border: none !important;
+}
+
+.navbar-nav > li.active > a {
+  border: none !important;
+}
+
+.navbar-nav > li.list-group-right.active > a {
+  font-weight: 800;
+  background-color: white !important;
+}
+
+.navbar-container {
+	padding: 0px 10px !important;
+}

@@ -1,0 +1,25 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<%= link_to brand do %>
+	<div class="col-md-12 mb-4 brand-container">
+		<div class="col-md-12 card h-100 product-container-card card-body">
+			<div class="col-md-2">
+				<% if brand.logo.present? %><%= image_tag(brand.logo.url, class: "brand-logo-container") %>
+				<% else %>
+					<%= image_tag("no-profile.png", class: "brand-logo-container") %>
+				<% end %>
+			</div>
+			<div class="col-md-10">
+		      <h4 class="card-title brand-title">
+				<span style="color: <%= @market.first_color %>"><%= sanitize brand.name %></spam>
+			  </h4>
+		      <h5>$<%= brand.about %></h5>
+		      <h5 class="card-text brand-description"><%= sanitize brand.about %></h5>
+		      <div id="brand_<%= brand.id %>_likes"><%= render partial: "likes", locals: {brand: brand} %></div>
+		      <div id="brand_<%= brand.id %>_favorites"><%= render partial: "favorites", locals: {brand: brand} %></div>
+	    	</div>
+		</div>
+	</div>
+<% end %>

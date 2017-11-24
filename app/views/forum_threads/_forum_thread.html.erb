@@ -1,0 +1,12 @@
+  <!-- <div class="col-sm-12"> -->
+    <div class="col-sm-12 forum-thread-container">
+      <div class="col-sm-1 forum-thread-post forum-thread-post-count" style="background-color: <%= @market.first_color %>; border-color: <%= @market.first_color %>; "><%= forum_thread.forum_posts.count %></div>
+      <div class="col-sm-11 forum-thread-post forum-thread-post-container">
+  	    <%= link_to forum_thread do %>
+          <h4 class="forum-thread-post forum-thread-post-details forum-thread-post-title"><%= sanitize markdownify forum_thread.subject %></h4>
+  	    <% end %>
+        <h5 class="forum-thread-post forum-thread-post-details forum-thread-post-date"><%= local_time_ago forum_thread.created_at %></h5>
+        <h6 class="forum-thread-post forum-thread-post-details forum-thread-post-username"><%= forum_thread.user.username %></h6>
+      </div>
+    </div>
+  <!-- </div> -->

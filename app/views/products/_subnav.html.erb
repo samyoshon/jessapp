@@ -1,0 +1,11 @@
+<div class="content-container">
+	<div>
+	<%= search_form_for @q, html: { class: "form-inline category_id card"} do |f| %>
+		<div class="form-group form-search" id="input-container">
+	    <%= f.search_field :title_cont, placeholder: "Search...", autofocus: true, class: "form-control form-search", id: "input-social" %>
+	    <i class="fa fa-search" aria-hidden="true" id="input-social-icon"></i>
+		</div>
+	    <%= f.button "Search", class: "card btn btn-primary btn-search hidden-xs hidden-sm", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i>".html_safe, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+	<% end %>
+	</div>
+</div>

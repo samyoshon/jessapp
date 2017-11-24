@@ -1,0 +1,20 @@
+<% if @banner.forum_show.present? %>
+    <div class="alert alert-info alert-dismissable">
+  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  		<%= @banner.forum_show %>
+  	</div>
+<% elsif current_user.present? && current_user.is_advertiser == true %>
+	<div class="alert alert-danger alert-dismissable">
+  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  		Sorry, advertisers do not have permissions to post.
+  	</div>
+<% end %>
+
+
+<div class="container">
+  <h1><%= sanitize  markdownify @forum_thread.subject %></h1>
+  <h5 class="forum-thread-post forum-thread-post-details forum-thread-post-date">Started <%= local_time_ago @forum_thread.created_at %> by <%= sanitize @forum_thread.user.username %></h5>
+  <%= render @forum_thread.forum_posts %>
+  <hr>
+  <%= render partial: "forum_posts/form" %>
+</div>

@@ -1,0 +1,23 @@
+<% if @banner.product_index.present? %>
+  <div class="alert alert-info alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= @banner.product_index %>
+</div>
+<% end %>
+
+<%= render partial: "brands/subnav" %>
+<div class="content-container">
+  <h1 class="page-header">Brands</h1>
+  <div class="col-sm-3 col-md-2 container-mobile container-mobile-product"> 
+    <%= render partial: "brands/sidenav" %>
+  </div>
+  <div class="col-sm-6 col-md-8 container-mobile container-mobile-product"> 
+  	<%= render @brands %>
+    <div class="col-md-12">
+      <%= will_paginate @brands %>
+    </div>
+  </div>
+  <div class="col-sm-3 col-md-2 container-mobile container-mobile-product"> 
+    <%= render partial: "brands/sidenav" %>
+  </div>
+</div>

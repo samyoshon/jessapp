@@ -1,0 +1,84 @@
+<div class="col-sm-3 col-md-2 hidden-xs hidden-sm sidenav-container-users">
+	<div class="sidenav">
+		<div class="sidenav-nav sidenav-categories">
+			<li class="<%= active_class(edit_user_registration_path) %> list-group-item list-group-item-action">
+				<%= link_to "Profile", edit_user_registration_path, class: "list-group-item list-group-item-action" %> 
+			</li>
+			<li class="<%= active_class(user_brands_path) %> list-group-item list-group-item-action">
+				<%= link_to "Brand", user_brands_path, class: "list-group-item list-group-item-action" %> 
+			</li>
+			<li class="<%= active_class(user_products_path) %> list-group-item list-group-item-action">
+				<%= link_to "Products", user_products_path, class: "list-group-item list-group-item-action" %>
+			</li>
+<!-- 			<li class="<%= active_class(user_forum_posts_path) %> list-group-item list-group-item-action">
+				<%= link_to "Forum Posts", user_forum_posts_path, class: "list-group-item list-group-item-action" %>
+			</li> -->
+			<% if current_user.admin? || current_user.is_mod? %>
+				<li class="<%= active_class(user_flagged_path) %> list-group-item list-group-item-action">
+					<%= link_to "Flagged Products", user_flagged_path, class: "list-group-item list-group-item-action" %>
+				</li>
+
+				<li class="<%= active_class(user_categories_path) %> list-group-item list-group-item-action">
+					<%= link_to "Product Categories", user_categories_path, class: "list-group-item list-group-item-action" %>
+				</li>
+
+				<li class="<%= active_class(user_forum_categories_path) %> list-group-item list-group-item-action">
+					<%= link_to "Forum Categories", user_forum_categories_path, class: "list-group-item list-group-item-action" %>
+				</li>
+			<% end %>
+
+			<% if current_user.admin? %>
+				<li class="<%= active_class(user_banners_path) %> list-group-item list-group-item-action">
+					<%= link_to "Banners", user_banners_path, class: "list-group-item list-group-item-action" %>
+				</li>
+				<li class="<%= active_class(user_advertisers_path) %> list-group-item list-group-item-action">
+					<%= link_to "Advertisers", user_advertisers_path, class: "list-group-item list-group-item-action" %>
+				</li>
+			<% end %>
+		</div>
+	</div>
+</div>	
+
+<div class="visible-xs visible-sm">
+    <div class="navbar-header">
+      <button class="col-xs-12 sidenav-container sidenav-container-filters navbar-toggle" type="button" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <h6 class="sidenav-filters-header"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Settings</h6>
+      </button>
+    </div>
+
+    <nav class="collapse navbar-collapse cs-navbar-collapse " role="navigation">
+      <ul class="nav navbar-nav user-nav">
+  		<li class="<%= active_class(edit_user_registration_path) %> list-group-item list-group-item-action">
+			<%= link_to "Profile", edit_user_registration_path, class: "list-group-item list-group-item-action" %> 
+		</li>
+		<li class="<%= active_class(user_products_path) %> list-group-item list-group-item-action">
+			<%= link_to "Products", user_products_path, class: "list-group-item list-group-item-action" %>
+		</li>
+<!-- 			<li class="<%= active_class(user_forum_posts_path) %> list-group-item list-group-item-action">
+			<%= link_to "Forum Posts", user_forum_posts_path, class: "list-group-item list-group-item-action" %>
+		</li> -->
+		<% if current_user.admin? || current_user.is_mod? %>
+			<li class="<%= active_class(user_flagged_path) %> list-group-item list-group-item-action">
+				<%= link_to "Flagged Products", user_flagged_path, class: "list-group-item list-group-item-action" %>
+			</li>
+
+			<li class="<%= active_class(user_categories_path) %> list-group-item list-group-item-action">
+				<%= link_to "Product Categories", user_categories_path, class: "list-group-item list-group-item-action" %>
+			</li>
+
+			<li class="<%= active_class(user_forum_categories_path) %> list-group-item list-group-item-action">
+				<%= link_to "Forum Categories", user_forum_categories_path, class: "list-group-item list-group-item-action" %>
+			</li>
+		<% end %>
+
+		<% if current_user.admin? %>
+			<li class="<%= active_class(user_banners_path) %> list-group-item list-group-item-action">
+				<%= link_to "Banners", user_banners_path, class: "list-group-item list-group-item-action" %>
+			</li>
+			<li class="<%= active_class(user_advertisers_path) %> list-group-item list-group-item-action">
+				<%= link_to "Advertisers", user_advertisers_path, class: "list-group-item list-group-item-action" %>
+			</li>
+		<% end %>
+	  </ul>
+    </nav>
+</div>

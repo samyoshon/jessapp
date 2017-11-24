@@ -1,0 +1,46 @@
+#input-container { 
+    position: relative;
+    height: 34px !important;
+}
+
+#input-social { 
+    margin: 0;
+    padding-left: 30px;
+}
+
+#input-social-icon {
+    position:absolute;
+    bottom: 13px;
+    left: 10px;
+}
+
+a.tooltip-icon:hover, a.tooltip-icon:focus {
+  text-decoration: none;
+}
+
+.btn-gradient {
+	border: none;
+	border-radius: 0;
+  color: white;
+
+	&:hover {
+		opacity: 0.8;
+    color: white;
+	}
+}
+
+.container-flex {
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+}
+
+.form-phone-form {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+    #input-social-icon {
+      bottom: 10px;
+  }
+}

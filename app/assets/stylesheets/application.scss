@@ -1,0 +1,131 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require font-awesome
+ *= require jquery.atwho
+ *= require slick
+ *= require slick-theme
+ *= require trix
+ */
+
+
+@import "bootstrap";
+@import "styles/**/*";
+
+/* START HERE */
+
+/* VARIABLES */
+
+$product-container-height: 380px;
+$image-container-height: 200px;
+$show-image-container-height: 500px;
+$image-container-preview-height: 100px;
+
+/* VARIBLES END */
+
+header {
+  position: fixed !important;
+  width: 100%;
+}
+
+.main-container {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.alert {
+  margin-top: -20px;
+  /*border-radius: 0px;*/
+}
+
+trix-editor {
+  border: 1px solid #bbb;
+  /*border-radius: 3px;*/
+  margin: 0;
+  padding: 0.4em 0.6em;
+  min-height: 5em;
+  outline: none;
+  overflow-y: scroll;
+  height: 100px;
+  resize: none;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.layout-container {
+  
+}
+
+.content-container {
+  padding: 0 20px;
+}
+
+.navbar {
+  background: #fff;
+  border-bottom: 5px solid transparent;
+}
+
+footer {
+  margin-top: 100px;
+  height: 100%;
+  width: 100%;
+  background-color: #e7e7e7;
+}
+
+.footer-div {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.alert-dismissable {
+  margin-top: -30px;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+	right: 3px;
+}
+
+@media screen and (max-width: 768px) {
+  input[type="search"] {
+    width: 100%;
+  }
+
+  .form-search {
+  	margin-bottom: 0px;
+  	width: 100%;
+  }
+
+  .alert-dismissable {
+    margin-top: -22px;
+  }
+
+  .alert-dismissable .close, .alert-dismissible .close {
+    right: -10px;
+  }
+
+  button:active, .button_to:active, .btn:active {
+  	top: 2px;
+    opacity: 80%;
+  }
+
+
+}

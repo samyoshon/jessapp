@@ -1,0 +1,23 @@
+<div class="container mobile-container">
+	<div class="row">
+    	<div class="col-sm-8 col-sm-offset-2 sign-up-div card">
+
+    		<h1>Resend confirmation instructions</h1>
+    		<hr>
+
+			<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+			  <%= devise_error_messages! %>
+
+			  <div><%= f.label :email %><br />
+			  <%= f.email_field :email, :autofocus => true, class: "form-control" %></div>
+
+			  <br>
+
+			  <div><%= f.button "Resend confirmation instructions", class: "btn btn-success btn-block btn-gradient card", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Resending...", style: "background: #{@market.first_color};  background: -webkit-linear-gradient(left, #{@market.first_color} , #{@market.second_color}); background: -o-linear-gradient(right, #{@market.first_color}, #{@market.second_color}); background: -moz-linear-gradient(right, #{@market.first_color}, #{@market.second_color}); background: linear-gradient(to right, #{@market.first_color} , #{@market.second_color});" %></div>
+			  <% end %>
+			<hr>
+			<%= render "devise/shared/links" %>
+
+		</div>
+	</div>
+</div>

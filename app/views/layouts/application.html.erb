@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns= "http://www.w3.org/1999/xhtml">
+<head>
+  <title>SlashForm - <%= @market.title %>'s exclusive platform.</title>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="description" content="SlashForm - Your exclusive platform.">
+  <meta name="keywords" content="marketplace, community, forums">
+  <meta name="author" content="SlashForm">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <!--Google Fonts-->
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <% if content_for?(:head) %>
+    <%= yield(:head) %>
+  <% end %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109658962-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-109658962-1');
+  </script>
+</head>
+<body>
+
+<%= render "shared/navbar" %>
+<div class="main-container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-info alert-dismissable" %>
+  <% end %>
+  <%= yield %>
+</div>
+<%= render "shared/footer" %>
+
+
+</body>
+
+
+</html>
+

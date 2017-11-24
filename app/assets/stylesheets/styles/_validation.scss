@@ -1,0 +1,12 @@
+.field_with_errors {
+	display: inline;
+}
+
+.field_with_errors .message {
+	color: #D00;
+	font-weight: normal;
+}
+
+#error_explanation h2, #error_explanation li {
+	font-size: 12px;
+}

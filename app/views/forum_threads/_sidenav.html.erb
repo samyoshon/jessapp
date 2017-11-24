@@ -1,0 +1,36 @@
+<div class="col-sm-3 col-md-2 hidden-xs hidden-sm sidenav-container-desktop">
+	<div class="sidenav card">
+		<%= search_form_for @q, html: { class: "form-inline category_id sidenav-categories"} do |f| %>
+			<h6 class="market-highlight" style="color: <%= @market.first_color %>">Topics</h6>
+			<% ForumCategory.all.order("category_name asc").each do |forum_category| %>
+	        	<label class="sidenav-category-label">
+	        		<%= f.check_box :forum_category_id_in, {class: "checkbox inline", multiple: true, include_blank: true, onchange: 'this.form.submit();' }, forum_category.id, nil %>
+	        		<%= markdownify forum_category.icon %> <%= forum_category.category_name %>
+	        	</label>
+	      	<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div class="visible-xs visible-sm">
+    <div class="navbar-header">
+      <button class="col-xs-4 sidenav-container sidenav-container-filters navbar-toggle" type="button" data-toggle="collapse" data-target=".fcs-navbar-collapse">
+        <h6 class="sidenav-filters-header" style="color: <%= @market.first_color %>"> <i class="fa fa-plus-circle" aria-hidden="true"></i> Filters</h6>
+      </button>
+      <%= button_to "Post Thread", new_forum_thread_path, :method => :get,class: "col-xs-8 sidenav-container sidenav-container-filters navbar-toggle", style: "background-color: #{@market.first_color}; color: white" %>
+    </div>
+
+    <nav class="collapse navbar-collapse fcs-navbar-collapse " role="navigation">
+      <ul class="nav navbar-nav">
+      	<%= search_form_for @q, html: { class: "form-inline category_id sidenav-categories"} do |f| %>
+			<h6 class="market-highlight" style="color: <%= @market.first_color %>">Topics</h6>
+			<% ForumCategory.all.order("category_name asc").each do |forum_category| %>
+	        	<label class="sidenav-category-label">
+	        		<li><%= f.check_box :forum_category_id_in, {class: "checkbox inline", multiple: true, include_blank: true, onchange: 'this.form.submit();' }, forum_category.id, nil %>
+	        		<%= markdownify forum_category.icon %> <%= forum_category.category_name %></li>
+	        	</label>
+	      	<% end %>
+		<% end %>
+	  </ul>
+    </nav>
+</div>

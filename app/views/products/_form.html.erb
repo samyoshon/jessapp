@@ -1,0 +1,83 @@
+<%= form_for(@product, :html => {:multipart => true})  do |f| %>
+  <% if @product.errors.any? %>
+<!--     <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul> -->
+      <% @product.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+      <!-- </ul> -->
+    </div>
+  <% end %>
+
+
+<!-- WHY DID I EMAIL MASK? -->
+  <div class="form-group">
+    <div><%= f.label :title %><br />
+    <%= f.text_field :title, autofocus: true, placeholder: "Title", class: "form-control", required: true %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div><%= f.label :price %><br />
+      <div class="form-group" id="input-container">
+        <%= f.number_field :price, required: true, placeholder: "Price", class: "form-control", id: "input-social" %>
+        <i class="fa fa-usd" aria-hidden="true" id="input-social-icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div><%= f.label :category %><br />
+      <div class="form-group">
+      <%= f.collection_select :category_id, Category.order(:category_name), :id, :category_name, {prompt: true}, {class: "form-control", required: true} %>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div><%= f.label :description %><br />
+    <%= f.trix_editor :description, required: true, placeholder: "Description", rows: 20, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <% if @product.images? %>
+      <% @product.images.each do |p| %>
+        <%= image_tag(p.url, class: "image-container-preview") %>
+      <% end %>
+    <% end %>
+    <div id="preview"></div>
+    <%= f.file_field :images, :onchange => "previewFiles()", multiple: true, placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %>
+    <%= f.hidden_field :images_cache, multiple: true %>
+  </div>
+  <hr>
+  <h4>Contact Preference</h4>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.check_box :contact_by_email, placeholder: "contact via email", rows: 10, class: "form-product-contact", disabled: true %> Email: <b><%= current_user.email %></b>
+        <br>
+        <% if current_user.phone_number? %>
+          <%= f.check_box :contact_by_phone, placeholder: "contact via phone", rows: 10, class: "form-product-contact", checked: true %> Phone number<a href="#" class="tooltip-icon" data-toggle="tooltip" title="Add a phone number if you'd like the option to be contacted via phone. Standard rates apply."> <i class="fa fa-info-circle" aria-hidden="true"></i></a> : <b><%= current_user.phone_number %></b>
+        <% else %>
+          <%= f.check_box :contact_by_phone, placeholder: "contact via phone", rows: 10, class: "form-product-contact", id: "form-phone-checkbox" %> Phone number<a href="#" class="tooltip-icon" data-toggle="tooltip" title="Add a phone number if you'd like the option to be contacted via phone. Standard rates apply."> <i class="fa fa-info-circle" aria-hidden="true"></i></a><br /> <%= f.phone_field :contact_pref, placeholder: "(XXX) XXX-XXXX", rows: 10, class: "form-control form-phone-form" %>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+
+  <hr>
+  <div class="form-group">
+    <h6>Product will stay posted for <%= $days_posted %> days.</h6>
+    <!-- language is in js -->
+    <p id="fp"></p> 
+    <% if @products > $max_products %>
+      <h6>You can only have <%= $max_products %> products posted at once.</h6>
+      <%= f.button "Post Product", class: "btn btn-primary btn-post card", disabled: true, id: "product-submit-btn", style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+    <% else %>
+      <%= f.button "Post Product", class: "btn btn-primary btn-post", id: "product-submit-btn", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Posting Product...".html_safe, style: "background-color: #{@market.first_color}; border-color: #{@market.first_color}" %>
+    <% end %>
+  </div>
+<% end %>

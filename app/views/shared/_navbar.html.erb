@@ -1,0 +1,40 @@
+<header class="navbar <%= content_for?(:navbar_style) ? yield(:navbar_style) : "navbar-default" %> navbar-static-top" role="banner" style="background: #fff; border-bottom: 5px solid; -moz-border-image: -moz-linear-gradient(left, <%= @market.second_color %> 0%, <%= @market.first_color %> 100%) !important; -webkit-border-image: -webkit linear-gradient(left, <%= @market.second_color %> 0%, <%= @market.first_color %> 100%) !important; border-image: linear-gradient(to right, <%= @market.second_color %> 0%, <%= @market.first_color %> 100%) !important; border-image-slice: 1 !important;" >
+  <div class="content-container navbar-container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_url, class: "navbar-brand" do %>
+        SlashForm
+      <% end %>
+    </div>
+
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li class="<%= active_class(products_path) %> <%= active_class(root_path) %> list-group-item list-group-item-action list-group-left"><%= link_to "Marketplace", products_path %></li>
+        <li class="<%= active_class(forum_threads_path) %> list-group-item list-group-item-action list-group-left"><%= link_to "Discussions", forum_threads_path %></li>
+        <li class="<%= active_class(brands_path) %> list-group-item list-group-item-action list-group-left"><%= link_to "Brands", brands_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if !current_user.present? || current_user.is_advertiser != true %> 
+          <li class="<%= active_class(forum_threads_path) %> list-group-item list-group-item-action list-group-right" style="color: <%= @market.first_color %>"><%= link_to "Post Thread", new_forum_thread_path, style: "color: #{@market.first_color}" %></li>
+        <% end %>
+        <% if !current_user.present? || current_user.is_advertiser != true %> 
+          <li class="<%= active_class(products_path) %> <%= active_class(root_path) %> list-group-item list-group-item-action list-group-right" style="color: <%= @market.first_color %>"><%= link_to "Post Product", new_product_path, style: "color: #{@market.first_color}" %></li>
+        <% else %>
+          <li class="<%= active_class(products_path) %> <%= active_class(root_path) %> list-group-item list-group-item-action list-group-right" ><%= link_to "Post Ad", new_product_path, style: "color: #{@market.first_color}" %></li>
+        <% end %>
+        <% if user_signed_in? %>
+          <li><%= link_to "Account", edit_user_registration_path %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Login", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+<% if @banner.product_new.present? %>
+    <div class="alert alert-info alert-dismissable">
+  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  		<%= @banner.product_new %>
+	</div>
+<% elsif @products > $max_products %>
+	<div class="alert alert-danger alert-dismissable">
+  		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  		You can only have <%= $max_products %> products posted at once.
+	</div>
+<% end %>
+
+<div class="container">
+	<h1>New Product</h1>
+
+	<%= render "form" %>
+</div>

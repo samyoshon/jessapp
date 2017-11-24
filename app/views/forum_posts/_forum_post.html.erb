@@ -1,0 +1,11 @@
+<%= div_for forum_post do %>
+<hr>
+  <p class="text-muted"><% if forum_post.user.images.present? %><%= image_tag(forum_post.user.images.url, class: "profile-image-container") %><% else %><%= image_tag("no-profile.png", class: "profile-image-container") %><% end %>  <%= forum_post.user.username %> <%=  local_time_ago forum_post.created_at %></p>
+
+  <div class="forum-thread-show-forum-posts-container">
+	  <p><%= sanitize markdownify forum_post.body %></p>
+	  <% if forum_post.images.url.present? %>
+        <div><%= image_tag forum_post.images.url, class: "image-container" %></div>
+      <% end %>
+  </div>
+<% end %>

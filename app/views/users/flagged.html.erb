@@ -1,0 +1,69 @@
+<div class="content-container">
+	<%= render partial: "users/sidenav" %>
+
+	<div class="container col-md-10 col-sm-12 container-mobile-product">
+		<h1>Flagged Products</h1>
+		<table class="table-striped">
+			<tr class="user-setting-tr-header">
+			    <th>Status</th>
+			    <th>Action</th>
+			    <th>Title</th>
+			    <th>Category</th>
+			    <th>Posted Date</th>
+			    <th>Expired Date</th>
+			    <th>Archive</th>
+	  		</tr>
+			<% @flags.each do |flag| %>
+				<%= form_for flag.product, url: user_update_flagged_path, method: :put, html: {id: flag.product.id} do |f| %>
+				  	<% if flag.product.errors.any? %>
+				    	<div id="error_explanation">
+				      		<h2><%= pluralize(flag.product.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+				      	<ul>
+				      		<% flag.product.errors.full_messages.each do |message| %>
+				        		<li><%= message %></li>
+				      		<% end %>
+				      	</ul>
+				    	</div>
+				 	<% end %>
+
+			<!-- view only none expired posts -->
+			  	<tr class="user-setting-tr">
+				    <% if flag.product.expire_date.nil? || flag.product.expire_date > Time.now %>
+				    	<td>Active</td>
+				    	<td>
+					    	<%= link_to edit_product_path(flag.product) do %>
+					    		<b>Edit</b>
+					    	<% end %>
+				    	</td>
+					<% else %>
+						<td>Expired</td>
+							<td>
+					    	<%= link_to edit_product_path(flag.product) do %>
+					    		<b>Repost</b>
+					    	<% end %>
+					    </td>
+					<% end %>
+				    <td><%= link_to product_path(flag.product) do %><%= flag.product.title %><% end %></td>
+				    <td><%= flag.product.category.category_name %></td>
+				    <td><%= local_time_ago flag.product.created_at.to_formatted_s(:db)  %></td>
+					<% if flag.product.expire_date.present? %>
+						<td><%= flag.product.expire_date > Time.now ? "" : local_time_ago(flag.product.expire_date.to_formatted_s(:db)) %></td>
+					<% else %>
+						<td></td>
+					<% end %>
+
+				    <!-- link to update product -->
+					<%= f.hidden_field :id, value: flag.product.id %>
+				    <%= f.hidden_field :expire_date, value: Time.now %>
+
+				    <!-- expire product -->
+				    <td>
+				    	<%= f.submit "Archive", class: 'btn btn-danger' %>
+				    </td>
+			  	</tr>
+				<% end %>
+			<% end %>
+		</table>
+	</div>
+</div>

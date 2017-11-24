@@ -1,0 +1,10 @@
+<% if current_user.present? && current_user.likes?(brand) %>
+  <%= link_to brand_like_path(brand.name), method: :delete, remote: true do %>
+  	<span class="upvote-container"><i class="fa fa-caret-up" aria-hidden="true"></i> <%= brand.likes.count %></span>
+  <% end %>
+<% else %>
+  <%= link_to brand_like_path(brand.name), method: :post, remote: true do %>
+  	<span class="upvote-container"><i class="fa fa-caret-up" aria-hidden="true"></i> <%= brand.likes.count %></span>
+  <% end %>
+<% end %>
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171124020650) do
+ActiveRecord::Schema.define(version: 20171125181552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,9 +73,13 @@ ActiveRecord::Schema.define(version: 20171124020650) do
     t.bigint "brand_category_id"
     t.string "email"
     t.text "logo"
+    t.string "slug"
+    t.string "tagline"
+    t.boolean "is_wholesale", default: false
     t.index ["brand_category_id"], name: "index_brands_on_brand_category_id"
     t.index ["product_id"], name: "index_brands_on_product_id"
     t.index ["review_id"], name: "index_brands_on_review_id"
+    t.index ["slug"], name: "index_brands_on_slug", unique: true
     t.index ["user_id"], name: "index_brands_on_user_id"
   end
 
@@ -149,10 +153,24 @@ ActiveRecord::Schema.define(version: 20171124020650) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.bigint "forum_category_id"
+    t.string "slug"
     t.index ["deleted_at"], name: "index_forum_threads_on_deleted_at"
     t.index ["forum_category_id"], name: "index_forum_threads_on_forum_category_id"
     t.index ["market_id"], name: "index_forum_threads_on_market_id"
+    t.index ["slug"], name: "index_forum_threads_on_slug", unique: true
     t.index ["user_id"], name: "index_forum_threads_on_user_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -210,9 +228,11 @@ ActiveRecord::Schema.define(version: 20171124020650) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "review_id"
+    t.string "slug"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["market_id"], name: "index_products_on_market_id"
     t.index ["review_id"], name: "index_products_on_review_id"
+    t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -265,8 +285,10 @@ ActiveRecord::Schema.define(version: 20171124020650) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.bigint "market_id"
+    t.string "slug"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["market_id"], name: "index_users_on_market_id"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   add_foreign_key "banners", "markets"

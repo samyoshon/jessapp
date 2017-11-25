@@ -36,9 +36,10 @@ Rails.application.routes.draw do
 
   resources :markets, :path => 'marketplace' #url = marketplace
 
-  resources :brands, param: :name do
+  resources :brands do
     resource :favorite, module: :brands
     resource :like, module: :brands
+    resources :products, module: :brands
   end
  
   resources :products do

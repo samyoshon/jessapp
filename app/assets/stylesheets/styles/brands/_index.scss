@@ -2,13 +2,55 @@
 	padding: 15px;
 }
 
+.brand-content-container a {
+	&:hover, :active, :focus {
+		text-decoration: none;
+		.brand-title span, .brand-tagline {
+			color: #6b6b6b !important;
+		}
+	}
+}
+
+.brand-actions a {
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+.brand-image-container {
+	text-align: center;	
+}
+
 .brand-logo-container {
-	height: 90px;
-    width: 90px;
+	height: 150px;
+    width: 150px;
     object-fit: contain;
 }
 
-.upvote-container {
+.brand-logo-container-product {
+	display: none;
+}
+
+.brand-title {
+	font-size: 1.75em;
+	margin-top: 0px;
+}
+
+.brand-tagline {
+	height: 20px;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #444;
+}
+
+.brand-action-container {
+	display: inline-block;	
+	width: 75px;
+	text-align: center;
+}
+
+.brand-action {
     padding: 2px 10px;
     border: 1px solid #f2f2f2;
 }

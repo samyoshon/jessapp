@@ -31,12 +31,21 @@ $product-container-height: 380px;
 $image-container-height: 200px;
 $show-image-container-height: 500px;
 $image-container-preview-height: 100px;
+$font-color: #000;
+$font-color-hover: #000;
 
 /* VARIBLES END */
 
 header {
   position: fixed !important;
   width: 100%;
+}
+
+a {
+  color: $font-color;
+  &:hover {
+    color: $font-color-hover;
+  }
 }
 
 .main-container {

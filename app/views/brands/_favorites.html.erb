@@ -1,10 +1,10 @@
 <% if current_user.present? && current_user.favorites?(brand) %>
-  <%= link_to brand_favorite_path(brand.name), method: :delete, remote: true do %>
-  	<span class="upvote-container"><i class="fa fa-heart-o" aria-hidden="true"></i></span>
+  <%= link_to brand_favorite_path(brand.id), method: :delete, remote: true do %>
+  	<div class="brand-action"><i class="fa fa-bookmark-o" aria-hidden="true"></i> SAVE</div>
   <% end %>
 <% else %>
-  <%= link_to brand_favorite_path(brand.name), method: :post, remote: true do %>
-  	<span class="upvote-container"><i class="fa fa-heart" aria-hidden="true"></i></span>
+  <%= link_to brand_favorite_path(brand.id), method: :post, remote: true do %>
+  	<div class="brand-action"><i class="fa fa-bookmark" aria-hidden="true"></i> SAVE</div>
   <% end %>
 <% end %>
 

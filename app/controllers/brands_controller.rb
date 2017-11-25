@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def index
     @q = Brand.search(params[:q])
@@ -32,8 +32,9 @@ class BrandsController < ApplicationController
   end
 
   def show
-    @brand = Brand.find_by(name: params[:name])
+    @brand = Brand.friendly.find(params[:id])
     @user = current_user
+    @products = @brand.user.products
   end
 
   private

@@ -16,14 +16,19 @@
       </br>
 
       <div class="form-group">
-        <div><%= f.label :name %><br />
+        <div><%= f.label :brand_name %><br />
         <%= f.text_field :name, required: true, autofocus: true, placeholder: "Brand Name", class: "form-control" %>
+        </div>
+      </div>  
+      <div class="form-group">
+        <div><%= f.label :brand_description %><br />
+        <%= f.text_field :tagline, required: true, autofocus: true, placeholder: "Brand Description", class: "form-control" %>
         </div>
       </div>  
       <hr>      
       <div class="form-group">
         <div><%= f.label :about %><br />
-        <%= f.trix_editor :about, required: true, autofocus: true, placeholder: "About", class: "form-control" %>
+        <%= f.trix_editor :about, required: true, autofocus: true, placeholder: "Tell us about your company...", class: "form-control" %>
         </div>
       </div> 
       <hr>
@@ -39,7 +44,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <div><%= f.label :website %><br />
-            <%= f.text_field :website, required: true, placeholder: "Website", class: "form-control" %>
+            <%= f.url_field :website, required: true, placeholder: "http://www.example.com", class: "form-control" %>
             </div>
           </div>
         </div>
@@ -47,7 +52,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <div><%= f.label :email %><br />
-            <%= f.email_field :email, required: true, placeholder: "Email Address", class: "form-control" %>
+            <%= f.email_field :email, required: true, placeholder: "email@example.com", class: "form-control" %>
             </div>
           </div>
         </div>

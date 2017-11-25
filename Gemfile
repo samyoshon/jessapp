@@ -121,4 +121,7 @@ gem 'jquery-slick-rails'
 gem 'jquery-atwho-rails'
 # gem 'redcarpet'
 
+# for url/slugs
+gem 'friendly_id', '~> 5.2.1'
+
 ruby "2.3.0"

@@ -13,9 +13,7 @@
   </div>
   <div class="col-sm-6 col-md-8 container-mobile container-mobile-product"> 
   	<%= render @brands %>
-    <div class="col-md-12">
-      <%= will_paginate @brands %>
-    </div>
+    <%= will_paginate @brands %>
   </div>
   <div class="col-sm-3 col-md-2 container-mobile container-mobile-product"> 
     <%= render partial: "brands/sidenav" %>

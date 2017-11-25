@@ -6,20 +6,26 @@
 <%= link_to brand do %>
 	<div class="col-md-12 mb-4 brand-container">
 		<div class="col-md-12 card h-100 product-container-card card-body">
-			<div class="col-md-2">
-				<% if brand.logo.present? %><%= image_tag(brand.logo.url, class: "brand-logo-container") %>
+			<div class="col-md-3 brand-image-container">
+				<% if brand.logo.present? %>
+					<%= image_tag(brand.logo.url, class: "brand-logo-container brand-logo-container-logo") %>
+					<% brand.user.products.first.images.each_with_index do |p, i| %>
+						<% if i == 0 %>
+							<%= image_tag(p.url, class: "brand-logo-container brand-logo-container-product") %>
+						<% end %>
+					<% end %>
 				<% else %>
 					<%= image_tag("no-profile.png", class: "brand-logo-container") %>
 				<% end %>
 			</div>
-			<div class="col-md-10">
-		      <h4 class="card-title brand-title">
+			<div class="col-md-9 brand-content-container">
+		      <h4 class="brand-title">
 				<span style="color: <%= @market.first_color %>"><%= sanitize brand.name %></spam>
 			  </h4>
-		      <h5>$<%= brand.about %></h5>
-		      <h5 class="card-text brand-description"><%= sanitize brand.about %></h5>
-		      <div id="brand_<%= brand.id %>_likes"><%= render partial: "likes", locals: {brand: brand} %></div>
-		      <div id="brand_<%= brand.id %>_favorites"><%= render partial: "favorites", locals: {brand: brand} %></div>
+		      <h5 class="brand-tagline"><%= brand.tagline %></h5>
+		      <div class="brand-action-container"><div class="brand-action">Category</div></div>
+		      <div class="brand-action-container" id="brand_<%= brand.id %>_likes"><%= render partial: "likes", locals: {brand: brand} %></div>
+		      <div class="brand-action-container" id="brand_<%= brand.id %>_favorites"><%= render partial: "favorites", locals: {brand: brand} %></div>
 	    	</div>
 		</div>
 	</div>

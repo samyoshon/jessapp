@@ -120,6 +120,8 @@ GEM
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     formatador (0.2.5)
+    friendly_id (5.2.2)
+      activerecord (>= 4.0.0)
     gemoji (3.0.0)
     github-markdown (0.6.9)
     globalid (0.4.1)
@@ -295,6 +297,7 @@ DEPENDENCIES
   dotenv-rails
   fog-aws
   font-awesome-rails
+  friendly_id (~> 5.2.1)
   gemoji
   github-markdown
   html-pipeline

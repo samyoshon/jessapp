@@ -22,15 +22,8 @@ class Brands::FavoritesController < ApplicationController
 
   private
 
-  def set_product
-    @product = Product.find(params[:product_id])
-  rescue
-    flash[:alert] = "Product could not be found."
-    redirect_to root_path
-  end
-
   def set_brand
-    @brand = Brand.find_by(name: params[:brand_name])
+    @brand = Brand.find(params[:brand_id])
   rescue
     flash[:alert] = "Brand could not be found."
     redirect_to root_path

@@ -4,10 +4,10 @@ $days_posted = 14
 $pagination_count = 25
 
 
-class ProductsController < ApplicationController
+class Brands::ProductsController < ApplicationController
   # before_action :set_market
   before_action :set_product, except: [:index, :new, :create]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update]
 
   def index
     @q = Product.search(params[:q])

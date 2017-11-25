@@ -297,7 +297,7 @@ class UsersController < ApplicationController
     end
 
     def brand_params
-      params.require(:brand).permit(:name, :phone_number, :website, :email, :facebook, :twitter, :instagram, :logo)
+      params.require(:brand).permit(:name, :phone_number, :website, :email, :facebook, :twitter, :instagram, :logo, :tagline, :about, :payment_policy, :return_policy, :shipping_policy, :faq_policy, :other_policy, :is_wholesale)
     end
 
     def category_params

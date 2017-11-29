@@ -3,6 +3,7 @@ class Brand < ApplicationRecord
   	friendly_id :name, use: [:slugged, :finders]
 
 	mount_uploader :logo, ImageUploader
+	mount_uploaders :images, ImageUploader
 	belongs_to :user
 	belongs_to :market
 	belongs_to :brand_category

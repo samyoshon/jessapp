@@ -1,9 +1,9 @@
 $(document).on('turbolinks:load', function() {
-	$('.brand-image-container').hover(function() {
-		$(this).children('.brand-logo-container-logo').hide();
-		$(this).children('.brand-logo-container-product').show();
+	$('.hover-container').hover(function() {
+		$(this).children('.brand-logo-container-first').hide();
+		$(this).children('.brand-logo-container-second').show();
 	}, function() {
-		$(this).children('.brand-logo-container-logo').show();
-		$(this).children('.brand-logo-container-product').hide();
+		$(this).children('.brand-logo-container-first').show();
+		$(this).children('.brand-logo-container-second').hide();
 	});
 });

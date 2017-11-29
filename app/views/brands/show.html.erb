@@ -1,5 +1,102 @@
-<h1>SHOW</h1>
+<% if @banner.product_show.present? %>
+    <div class="alert alert-info alert-dismissable">
+  	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  	<%= @banner.product_show %>
+  </div>
+<% end %>
+<div class="container mobile-container">
+  <!-- Portfolio Item Heading -->
+  
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+
+    <div class="col-md-7 show-images-container">
+    <% if @brand.images.present? %>
+			<div class="slider slider-for">
+				<% @brand.images.each do |p| %>
+					<div><%= image_tag(p.url, class: "show-image-container") %></div>
+				<% end %>
+			</div>
+			<div class="slider slider-nav">
+				<% @brand.images.each do |p| %>
+					<div><%= image_tag(p.url, class: "show-image-selection-container") %></div>
+				<% end %>
+			</div>
+		<% else %>
+			<div><%= image_tag("no-image.png", alt: "Default Profile Pic", class: "image-container no-image show-no-image") %></div>
+		<% end %>
+    </div>
+
+    <div class="col-md-5 show-details-container card">
+      <h3>
+        <% if @brand.logo.present? %><%= image_tag(@brand.logo.url, class: "profile-image-container") %><% else %><%= image_tag("no-profile.png", class: "profile-image-container") %><% end %> <%= @brand.name %></h3>
+      <% if current_user.present? || (current_user.present? && current_user.is_advertiser != true) %>
+    	  <h4 class="social-icons">
+    		<% if @brand.facebook? %>
+          <a href="http://www.facebook.com/<%= @brand.facebook %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+        <% if @brand.instagram? %>
+    		  <a href="http://www.instagram.com/<%= @brand.instagram %>" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+<!--         <% if @brand.snapchat? %>
+    		  <a href="#"><i class="fa fa-snapchat" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %> -->
+        <% if @brand.twitter? %>
+    		  <a href="http://www.twitter.com/<%= @brand.twitter %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
+        <% end %>
+    	  </h4>
+      <% end %>
+      <p><%= local_time_ago @brand.created_at %></p>
+      <hr>
+      <h2 class="my-4"><%= sanitize markdownify @brand.name %></h2>
+      <h4 style="color: <%= @market.first_color %>;">$<%= @brand.tagline %></h4>
+      <h4 class="my-3">Product Description</h4>
+      <p><%= sanitize markdownify @brand.about %></p>
+      <hr>
+      <div class="btn btn-contact-info btn-gradient btn-block card" style="background: <%= @market.first_color %>;  background: -webkit-linear-gradient(left, <%= @market.first_color %> , <%= @market.second_color %>); background: -o-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: -moz-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: linear-gradient(to right, <%= @market.first_color %> , <%= @market.second_color %>);">Contact Seller</div>
+		<div class="show-contact-info show-contact-info-hidden">
+    <% if current_user.present? %>
+        <h5>Contact Details:</h5>
+				<p><i class="fa fa-envelope" aria-hidden="true"></i> <%= sanitize @brand.email %></p>
+				<% if @brand.phone_number? %>
+					<p><i class="fa fa-phone" aria-hidden="true"></i> <%= sanitize @brand.phone_number %></p>
+				<% end %>
+    <% else %>
+      <h5><%= link_to "Sign up to see contact details.", new_user_registration_path() %></h5>
+    <% end %>
+		</div>
+	</div>
+</div>
 
 <% @products.each do |product| %>
-	<%= product.title %>
+<div class="col-lg-4 col-md-4 col-sm-6 mb-4 product-container">
+  <div class="card h-100 product-container-card">
+    <%= link_to product do %>
+      <% if product.images.present? %>
+        <% product.images.each_with_index do |p, i| %>
+          <% if i == 0 %>
+            <%= image_tag(p.url, class: "brand-logo-container brand-logo-container-first") %>
+            <%= image_tag(p.url, class: "brand-logo-container brand-logo-container-second") %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= image_tag("no-image.png", alt: "Default Profile Pic", class: "image-container no-image") %>
+      <% end %>
+    <% end %>
+    <div class="card-body">
+      <h4 class="card-title product-title">
+        <%= link_to product do %>
+			<span style="color: <%= @market.first_color %>"><%= sanitize markdownify product.title %></spam>
+		<% end %>
+      </h4>
+      <h5>$<%= product.price %></h5>
+      <h5 class="card-text product-description"><%= sanitize markdownify product.description %></h5>
+    </div>
+    <div class="card-footer">
+      <small><%= local_time_ago product.created_at %></small>
+	  <span class="product-category"><%= markdownify product.category.icon %></span>
+    </div>
+  </div>
+</div>
 <% end %>

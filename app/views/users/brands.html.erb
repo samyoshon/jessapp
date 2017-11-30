@@ -6,7 +6,14 @@
 
     <%= form_for @brand, url: user_update_brands_path, method: :put, html: {id: @brand.id} do |f| %>
       
-      
+      <% if @brand.logo.url.present? %>
+        <div id="preview-logo"><%= image_tag @brand.logo.url %></div>
+      <% elsif %>
+        <div id="preview-logo"></div>
+      <% end %>
+      </br>
+      <div class="input-logo"><%= f.file_field :logo, :onchange => "previewLogo()", placeholder: "Profile Image", accept: ".jpg, .jpeg, .gif, .png", id: "image-form-logo" %></div>
+      </br>
 
       <div class="form-group">
         <div><%= f.label :brand_name %><br />
@@ -14,58 +21,41 @@
         </div>
       </div>  
       <div class="form-group">
-        <div><%= f.label :brand_description %><br />
+        <div><%= f.label :brand_tagline %><br />
         <%= f.text_field :tagline, required: true, autofocus: true, placeholder: "Brand Description", class: "form-control" %>
         </div>
       </div>  
-      <hr>    
+      <hr>
       <div class="form-group">
         <div><%= f.label :about %><br />
         <%= f.trix_editor :about, required: true, autofocus: true, placeholder: "Tell us about your company...", class: "form-control" %>
         </div>
       </div> 
-      <hr>  
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group">
-            <% if @brand.images? %>
-              <div id="preview">
-                <% @brand.images.each do |p| %>
-                  <%= image_tag(p.url, class: "image-container-preview") %>
-                <% end %>
-              </div>
-            <% elsif %>  
-              <div id="preview"></div>
+      <hr>
+      <div class="form-group">
+        <div><%= f.label :lookbook %><br />
+        <% if @brand.images? %>
+          <div id="preview">
+            <% @brand.images.each do |p| %>
+              <%= image_tag(p.url, class: "image-container-preview") %>
             <% end %>
-              <%= f.file_field :images, :onchange => "previewFiles()", multiple: true, placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %>
-              <%= f.hidden_field :images_cache, multiple: true %>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <div><%= f.label :youtube %><br />
-            <%= f.url_field :youtube, required: true, placeholder: "YouTube", class: "form-control" %>
-            </div>
-          </div>
-        </div>
+        <% elsif %>  
+          <div id="preview"></div>
+        <% end %>
+          <div class="input-image"><%= f.file_field :images, :onchange => "previewFiles()", multiple: true, placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %></div>
+          <%= f.hidden_field :images_cache, multiple: true %>
       </div>
       <hr>
       <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <div><%= f.label :phone_number %><a href="#" class="tooltip-icon" data-toggle="tooltip" title="Add a phone number if you'd like the option to be contacted via phone. Standard rates apply."> <i class="fa fa-info-circle" aria-hidden="true"></i> </a><br />
-            <%= f.phone_field :phone_number, placeholder: "(XXX) XXX-XXXX", class: "form-control" %>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="form-group">
             <div><%= f.label :website %><br />
             <%= f.url_field :website, required: true, placeholder: "http://www.example.com", class: "form-control" %>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="form-group">
             <div><%= f.label :email %><br />
             <%= f.email_field :email, required: true, placeholder: "email@example.com", class: "form-control" %>
@@ -75,19 +65,25 @@
       </div>
          
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+          <div class="form-group" id="input-container">
+            <%= f.url_field :youtube, placeholder: "http://www.youtube.com/example", class: "form-control", id: "input-social" %>
+            <i class="fa fa-youtube" aria-hidden="true" id="input-social-icon"></i>
+          </div>
+        </div>
+        <div class="col-sm-3">
           <div class="form-group" id="input-container">
             <%= f.text_field :facebook, placeholder: "Facebook", class: "form-control", id: "input-social" %>
             <i class="fa fa-facebook-official" aria-hidden="true" id="input-social-icon"></i>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="form-group" id="input-container">
             <%= f.text_field :instagram, placeholder: "Instagram", class: "form-control", id: "input-social" %>
             <i class="fa fa-instagram" aria-hidden="true" id="input-social-icon"></i>
           </div>
         </div>
-         <div class="col-sm-4">
+         <div class="col-sm-3">
           <div class="form-group" id="input-container">
             <%= f.text_field :twitter, placeholder: "Twitter", class: "form-control", id: "input-social" %>
             <i class="fa fa-twitter" aria-hidden="true" id="input-social-icon"></i>

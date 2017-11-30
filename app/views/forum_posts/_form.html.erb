@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <div id="preview"></div>
-    <%= f.file_field :images, :onchange => "previewFiles()", placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %>
+    <div class="input-image"><%= f.file_field :images, :onchange => "previewFiles()", placeholder: "Image", accept: ".jpg, .jpeg, .gif, .png", class: "form-control", id: "image-form" %></div>
     <%= f.hidden_field :images_cache %>
   </div>
   

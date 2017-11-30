@@ -29,8 +29,11 @@
     </div>
 
     <div class="col-md-5 show-details-container card">
-      <h3>
-        <% if @brand.logo.present? %><%= image_tag(@brand.logo.url, class: "profile-image-container") %><% else %><%= image_tag("no-profile.png", class: "profile-image-container") %><% end %> <%= @brand.name %></h3>
+        <h3>
+        <% if @brand.logo.present? %><%= image_tag(@brand.logo.url, class: "profile-image-container") %><% else %><%= image_tag("no-profile.png", class: "profile-image-container") %><% end %> <%= @brand.name %>
+        </h3>
+        <h6><%= @brand.tagline %></h6>
+        <hr>
       <% if current_user.present? || (current_user.present? && current_user.is_advertiser != true) %>
     	  <h4 class="social-icons">
     		<% if @brand.facebook? %>
@@ -39,22 +42,15 @@
         <% if @brand.instagram? %>
     		  <a href="http://www.instagram.com/<%= @brand.instagram %>" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
         <% end %>
-<!--         <% if @brand.snapchat? %>
-    		  <a href="#"><i class="fa fa-snapchat" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
-        <% end %> -->
         <% if @brand.twitter? %>
     		  <a href="http://www.twitter.com/<%= @brand.twitter %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true" style="color: <%= @market.first_color %>"></i></a>
         <% end %>
     	  </h4>
       <% end %>
-      <p><%= local_time_ago @brand.created_at %></p>
       <hr>
-      <h2 class="my-4"><%= sanitize markdownify @brand.name %></h2>
-      <h4 style="color: <%= @market.first_color %>;">$<%= @brand.tagline %></h4>
-      <h4 class="my-3">Product Description</h4>
       <p><%= sanitize markdownify @brand.about %></p>
       <hr>
-      <div class="btn btn-contact-info btn-gradient btn-block card" style="background: <%= @market.first_color %>;  background: -webkit-linear-gradient(left, <%= @market.first_color %> , <%= @market.second_color %>); background: -o-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: -moz-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: linear-gradient(to right, <%= @market.first_color %> , <%= @market.second_color %>);">Contact Seller</div>
+      <div class="btn btn-contact-info btn-gradient btn-block card" style="background: <%= @market.first_color %>;  background: -webkit-linear-gradient(left, <%= @market.first_color %> , <%= @market.second_color %>); background: -o-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: -moz-linear-gradient(right, <%= @market.first_color %>, <%= @market.second_color %>); background: linear-gradient(to right, <%= @market.first_color %> , <%= @market.second_color %>);">VISIT BRAND <i class="fa fa-external-link" aria-hidden="true"></i></div>
 		<div class="show-contact-info show-contact-info-hidden">
     <% if current_user.present? %>
         <h5>Contact Details:</h5>
@@ -68,7 +64,7 @@
 		</div>
 	</div>
 </div>
-
+<hr>
 <% @products.each do |product| %>
 <div class="col-lg-4 col-md-4 col-sm-6 mb-4 product-container">
   <div class="card h-100 product-container-card">
@@ -76,8 +72,8 @@
       <% if product.images.present? %>
         <% product.images.each_with_index do |p, i| %>
           <% if i == 0 %>
-            <%= image_tag(p.url, class: "brand-logo-container brand-logo-container-first") %>
-            <%= image_tag(p.url, class: "brand-logo-container brand-logo-container-second") %>
+            <%= image_tag(p.url, class: "image-container brand-logo-container-first") %>
+            <%= image_tag(p.url, class: "image-container brand-logo-container-second") %>
           <% end %>
         <% end %>
       <% else %>
@@ -91,11 +87,6 @@
 		<% end %>
       </h4>
       <h5>$<%= product.price %></h5>
-      <h5 class="card-text product-description"><%= sanitize markdownify product.description %></h5>
-    </div>
-    <div class="card-footer">
-      <small><%= local_time_ago product.created_at %></small>
-	  <span class="product-category"><%= markdownify product.category.icon %></span>
     </div>
   </div>
 </div>

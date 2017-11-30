@@ -3,7 +3,7 @@ function previewFiles() {
   $('#preview').empty();
 
   var preview = document.querySelector('#preview');
-  var files   = document.querySelector('input[type=file]').files;
+  var files   = document.querySelector('div.input-image input[type=file]').files;
 
 
   function readAndPreview(file) {
